@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor "Проживающий студент" as User
+usecase "Авторизация" as UC_A
+User -- UC_A
+
+package "Таблица 2" {
+    usecase "Просмотр информации, выложенной администрацией системы" as UC_L
+    usecase "Возможность изменения графика уборки на кухне" as UC_R
+    usecase "Ограниченный просмотр данных проживающих студентов" as UC_Y
+}
+UC_A -- UC_L
+UC_A -- UC_R
+UC_A -- UC_Y
+
+left to right direction
+skinparam packageStyle rectangle
+actor "Староста этажа" as User1
+usecase "Авторизация" as UC_A1
+User1 -- UC_A1
+
+package "Таблица 1" {
+    usecase "Просмотр информации, выложенной администрацией системы" as UC_L1
+    usecase "Возможность изменения графика уборки на кухне" as UC_R1
+    usecase "Ограниченный просмотр данных проживающих студентов" as UC_Y1
+}
+UC_A1 -- UC_L1
+UC_A1 -- UC_R1
+UC_A1 -- UC_Y1
+@enduml

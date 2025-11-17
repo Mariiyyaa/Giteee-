@@ -4,7 +4,6 @@ from sqlite3 import Connection
 def get_connection(db: str = "users.db") -> Connection:
     return sqlite3.connect(db)
 
-
 def create_tables(db: str = "users.db"):
     conn = get_connection(db)
     cursor = conn.cursor()

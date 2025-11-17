@@ -47,7 +47,7 @@ def main():
                         status = "Свободна"
                     else:
                         status = "Занята"
-                    print("Комната {room[0]}: {room[1]} мест, {status}")
+                    print(f"Комната {room[0]}: {room[1]} мест, {status}")
             else:
                 print("Информация не внесена.")
 
@@ -58,11 +58,11 @@ def main():
             for room in sizeroom:
                 if room[1] == 0:
                     status = "Свободна"
-                if room[1] == 1 or room[1] == 2:
+                elif room[1] == 1 or room[1] == 2:
                     status = "Частично занята"
-                if room[1] == 3:
+                else room[1] == 3:
                     status = "Занята"
-                print("Комната {room[0]}: {status}")
+                print(f"Комната {room[0]}: {status}")
 
 
         elif choice == "5": #Добавить студента

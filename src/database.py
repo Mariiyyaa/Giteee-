@@ -81,8 +81,8 @@ def insert_sample_data(db: str = "users.db"):
     cursor.execute("SELECT COUNT(*) FROM Starosta")
     if cursor.fetchone()[0] == 0:
         starosta = [
-            ("Дима Дмитриев, обновление данных о проживающих студентах"),
-            ("Иван Иванов, внесение информации о состоянии комнат")
+            ("Дима Дмитриев", "обновление данных о проживающих студентах"),
+            ("Иван Иванов", "внесение информации о состоянии комнат")
         ]
         cursor.executemany("INSERT INTO Statosta (Name starost, Zadacha starost) VALUES (?, ?)", starosta)
         print("Функции старосты определены.")

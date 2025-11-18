@@ -1,5 +1,5 @@
 import sqlite3
-from src.models.models import Room, Student_room, House_student, Student, Student_doc
+from src.models.models import Room, Student, Student_room, Starosta
 
 class Repository:
     def __init__(self, db_file: str = "users.db"):
@@ -107,24 +107,3 @@ class Repository:
         self.cursor.execute("INSERT INTO House_student (Name, Numberoom) VALUES (?, ?)", (name, number_room))
         self.conn.commit()
         return self.cursor.lastrowid
-
-# Student_doc
-    def get_all_student_docs(self):
-        self.cursor.execute("SELECT ID, Name, Number FROM Student_doc")
-        rows = self.cursor.fetchall()
-        return [Student_doc(id=row["ID"], name=row["Name"], number=row["Number"]) for row in rows]
-
-    def get_student_doc(self, doc_id: int):
-        self.cursor.execute("SELECT ID, Name, Number FROM Student_doc WHERE ID = ?", (doc_id,))
-        row = self.cursor.fetchone()
-        if row:
-            return Student_doc(id=row["ID"], name=row["Name"], number=row["Number"])
-        return None
-
-    def add_student_doc(self, name: str, number: str):
-        self.cursor.execute("INSERT INTO Student_doc (Name, Number) VALUES (?, ?)", (name, number))
-        self.conn.commit()
-        return self.cursor.lastrowid
-
-    def close(self):
-        self.conn.close()

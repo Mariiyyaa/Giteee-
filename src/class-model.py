@@ -5,27 +5,21 @@ class Student:
         self.numbergroop = numbergroop
 
 class Room:
-    def __init__(self, id, name,size, status, id_obsh):
+    def __init__(self, id, name student, size, status, Number_ob):
         self.id = id
         self.name = name
         self.size = size
         self.status = status
-        self.id_obsh = id_obsh
+        self.number_ob = Number_ob
 
 class Student_room:
-    def __init__(self, id, id_students, id_room):
-        self.id = id
-        self.id_students = id_students
-        self.id_room = id_room
-
-class House_student:
-    def __init__(self, id, name, numberoom):
+    def __init__(self, id, name, number_room):
         self.id = id
         self.name = name
-        self.numberoom = numberoom
+        self.number_room = number_room
 
-class Student_doc:
-    def __init__(self, id, name, number):
+class Starosta:
+    def __init__(self, id, name_starost, zadacha_starost):
         self.id = id
-        self.name = name
-        self.number = number
+        self.name_starost = name_starost
+        self.zadacha_starost = zadacha_starost

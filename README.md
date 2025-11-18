@@ -31,4 +31,4 @@
 # Практическая часть лабораторной работы
 ## [Use-case диаграмма](https://github.com/Mariiyyaa/Giteee-/blob/main/Use-case.png "Use-case")
 ## [Блок-схема](https://app.diagrams.net/?libs=general;flowchart#LДиаграмма%20без%20названия.drawio#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D "Блок-схема")
-## [Диаграмма](https://github.com/Mariiyyaa/Giteee-/blob/main/Отчет1.pdf "Диаграмма")
+## [Диаграмма](https://github.com/Mariiyyaa/Giteee-/blob/main/Связи%20для%20бд1.pdf "Диаграмма")

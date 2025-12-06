@@ -1,13 +1,14 @@
+# src/database/db.py
 import sqlite3
-from sqlite3 import Connection
-
-def get_connection(db: str = "users.db") -> Connection:
-    return sqlite3.connect(db)
 
 def create_tables(db: str = "users.db"):
-    conn = get_connection(db)
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
+    # Удаляем старую таблицу Starosta если существует
+    cursor.execute("DROP TABLE IF EXISTS Starosta")
+
+    # Создаем таблицы
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Room (
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,22 +34,26 @@ def create_tables(db: str = "users.db"):
             Numbergroop VARCHAR(50)
         )
     ''')
+
+    # Создаем таблицу Starosta с ПРОСТЫМИ названиями колонок
     cursor.execute('''
-           CREATE TABLE IF NOT EXISTS Starosta (
-               ID INTEGER PRIMARY KEY AUTOINCREMENT,
-               Name starost VARCHAR(50),
-               Zadacha starost VARCHAR(50)
-           )
-       ''')
+        CREATE TABLE IF NOT EXISTS Starosta (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name VARCHAR(50),
+            Zadacha VARCHAR(50)
+        )
+    ''')
 
     conn.commit()
     conn.close()
 
 
 def insert_sample_data(db: str = "users.db"):
-    conn = get_connection(db)
+    """Добавить тестовые данные"""
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
+    # Студенты
     cursor.execute("SELECT COUNT(*) FROM Student")
     if cursor.fetchone()[0] == 0:
         students = [
@@ -56,8 +61,8 @@ def insert_sample_data(db: str = "users.db"):
             ("Дарья Демидова", "25-ИСТ-2")
         ]
         cursor.executemany("INSERT INTO Student (Name, Numbergroop) VALUES (?, ?)", students)
-        print("Добавлены студенты.")
 
+    # Комнаты
     cursor.execute("SELECT COUNT(*) FROM Room")
     if cursor.fetchone()[0] == 0:
         rooms = [
@@ -66,27 +71,24 @@ def insert_sample_data(db: str = "users.db"):
             ("177", "3 человека", "Занята", "1")
         ]
         cursor.executemany("INSERT INTO Room (Name_room, Size, Status, Number_ob) VALUES (?, ?, ?, ?)", rooms)
-        print("Комната добавлена.")
 
-
+    # Заселение
     cursor.execute("SELECT COUNT(*) FROM Student_room")
     if cursor.fetchone()[0] == 0:
         student_rooms = [
             ("Мария Забродина", "175"),
             ("Дарья Демидова", "176")
         ]
-        cursor.executemany("INSERT INTO Student_room (Name, Number room) VALUES (?, ?)", student_rooms)
-        print("Студент заселен.")
+        cursor.executemany("INSERT INTO Student_room (Name, Numberoom) VALUES (?, ?)", student_rooms)
 
+    # Старосты - используем Name и Zadacha
     cursor.execute("SELECT COUNT(*) FROM Starosta")
     if cursor.fetchone()[0] == 0:
         starosta = [
-            ("Дима Дмитриев, обновление данных о проживающих студентах"),
-            ("Иван Иванов, внесение информации о состоянии комнат")
+            ("Дима Дмитриев", "обновление данных о проживающих студентах"),
+            ("Иван Иванов", "внесение информации о состоянии комнат")
         ]
-        cursor.executemany("INSERT INTO Statosta (Name starost, Zadacha starost) VALUES (?, ?)", starosta)
-        print("Функции старосты определены.")
+        cursor.executemany("INSERT INTO Starosta (Name, Zadacha) VALUES (?, ?)", starosta)
 
     conn.commit()
     conn.close()
-
